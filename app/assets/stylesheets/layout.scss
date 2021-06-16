@@ -1,0 +1,68 @@
+$dark-nav-background: rgba(0,0,0,.55);
+$dark-nav-text-colour: #f8f9fa;
+$light-nav-background: #f8f9fa;
+$light-nav-text-colour: rgba(0,0,0,.55);
+$nav-text-hover-colour: rgba(0,0,0,.7);
+
+.theme-light .footer-navbar a {
+  color: $light-nav-text-colour;
+}
+
+.theme-dark .footer-navbar a {
+  color: $dark-nav-text-colour;
+}
+
+.theme-light .footer-navbar {
+  background-color: $light-nav-background;
+}
+
+.theme-dark .footer-navbar {
+  background-color: $dark-nav-background;
+}
+
+.theme-light .navbar a {
+  color: $light-nav-text-colour;
+}
+
+.theme-dark .navbar a {
+  color: $dark-nav-text-colour;
+}
+
+.theme-light .navbar {
+  background-color: $light-nav-background;
+}
+
+.theme-dark .navbar {
+  background-color: $dark-nav-background;
+}
+
+.theme-dark .navbar .dropdown-menu {
+  background-color: $dark-nav-background;
+}
+
+.footer-navbar a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.footer-navbar a:hover {
+  color: $nav-text-hover-colour;
+}
+
+.footer-navbar {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-around;
+  align-items: center;
+  height: 10vh;
+  z-index: 1000;
+}
