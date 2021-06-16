@@ -13,4 +13,5 @@ window.changeTheme = (theme) =>{
   let themeController = document.querySelector("#theme-controller")
   themeController.removeAttribute("class")
   themeController.classList.add(theme)
+  document.cookie = `theme=${theme}`
 }

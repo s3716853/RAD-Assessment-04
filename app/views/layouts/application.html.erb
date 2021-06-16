@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <div id="theme-controller" class="theme-light">
+    <div id="theme-controller" class="<%= cookies[:theme] ? cookies[:theme] : 'theme-light'%>">
       <%= render "layouts/header" %>
       <%= yield %>
       <%= render "layouts/footer" %>
