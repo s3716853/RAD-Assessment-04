@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: RAD-Assessment-04_production
-  username: RAD-Assessment-04
+  database: dd1212t0q5mk5r
+  username: nbbkakndmahwzj
   password: <%= ENV['RAD-ASSESSMENT-04_DATABASE_PASSWORD'] %>
