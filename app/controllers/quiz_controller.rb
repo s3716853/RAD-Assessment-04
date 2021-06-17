@@ -47,7 +47,11 @@ class QuizController < ApplicationController
     
     def retrieve_quiz_questions(quiz_params)
       
+      # Randomly assign a certain number of questions per selected 
+      # category selected by the user
       random_integer_limit = quiz_params[:number].to_i
+      # category_limits will store how many questions for each category there
+      # should be
       category_limits = []
       quiz_params[:categories].each_with_index do |category, index|
         if index + 1 == quiz_params[:categories].length
@@ -60,24 +64,59 @@ class QuizController < ApplicationController
       end
       
       questions_list = [];
+      category_question_lists = [];
       begin
         base_url = "https://quizapi.io/api/v1/questions?apiKey=59keJx4a326CrYjoGvrbaMTB8Jrps943N4b33nwU&difficulty=#{quiz_params[:difficulty]}"
         quiz_params[:categories].each_with_index do |category, index| 
-          request_url = "#{base_url}&limit=#{category_limits[index]}&category=#{category}"
-          puts request_url
+          request_url = "#{base_url}&category=#{category}"
           response = HTTParty.get(request_url)
-          if response.code != 200
+          if response.code != 200 && response.code != 404
             throw StandardError.new(response.code)
+          elsif response.code == 404
+            category_question_lists.append([])
+          else
+            category_question_lists.append(response) 
           end
-          questions_list = questions_list + response
         end
       rescue HTTParty::Error, StandardError => e
         puts e
         puts "Error with quizapi request, using local instance"
         questions_list = filterLocal quiz_params
+        return questions_list
       end
       
-      questions_list
+      # dealing with some categories not having many (or ANY) of some question difficulties
+      # tries to make a quiz of the specified length using any category which has enough questions 
+      # to fill the gaps
+      # eg. Programming category may have been set to be 2 of the questions, 
+      # but the request for questions came back with only 1
+      # however Linux category is meant to have 3 questions, but has 5 more 
+      # in the returned data, so one more will be added to the Linux category for the quiz
+      category_question_lists.each_with_index do |category_results, index|
+        if category_results.length < category_limits[index]
+          difference = category_limits[index] - category_results.length
+          
+          category_question_lists.each_with_index do |secondary_category_results, secondary_index|
+            if secondary_category_results.length >= category_limits[secondary_index] + difference
+              category_limits[secondary_index] = category_limits[secondary_index] + difference
+              break
+            end
+          end
+          
+          category_limits[index] = category_results.length
+        end
+      end
+      
+      # Creating list of questions for the quiz based on the how many 
+      # for each category have been defined in category_limits
+      category_question_lists.each_with_index do |category_results, index|
+        for i in 0..category_limits[index]-1
+          questions_list.append(category_results[i])
+        end
+      end
+      
+      
+      return questions_list
     end
     
     def filterLocal(quiz_params)
