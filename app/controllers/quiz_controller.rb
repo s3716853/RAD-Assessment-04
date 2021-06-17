@@ -21,9 +21,10 @@ class QuizController < ApplicationController
         #which would cause an infinite loop, thereofr the following is for that possiblity
         if @questions.length == allowed_questions.length
           continue_search = false
-        
         end
       end
+      
+      @history = cookies[:quizplus_quizhistory] ? JSON.parse(cookies[:quizplus_quizhistory])  : []
     end
     
     #getting correct answers for the javascript

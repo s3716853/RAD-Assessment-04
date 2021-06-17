@@ -19,5 +19,12 @@
       <button class='btn btn-primary' id='quiz-reset-btn'>Restart Same Quiz</button>
       <button class='btn btn-primary' id='quiz-restart-btn'>New Quiz With Same Settings</button>
     </div>
+    <div id='quiz-results-previous'>
+      <% @history.each do |history_item| %>
+        <div>
+          <%= history_item %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
