@@ -95,12 +95,15 @@ https://s3716853-rad.herokuapp.com
        Running: rake assets:precompile
        Yarn executable was not detected in the system.
        Download Yarn at https://yarnpkg.com/en/docs/install
-       I, [2021-06-17T13:48:59.161376 #301]  INFO -- : Writing /tmp/build_1958b33d/public/assets/application-b781eb9f7804abd01cea93b5a8aa3e6763bdb9a27c6b4f2f22ed2914dba5fb1e.js
-       I, [2021-06-17T13:48:59.161829 #301]  INFO -- : Writing /tmp/build_1958b33d/public/assets/application-b781eb9f7804abd01cea93b5a8aa3e6763bdb9a27c6b4f2f22ed2914dba5fb1e.js.gz
-       Asset precompilation completed (6.70s)
+       I, [2021-06-17T16:42:16.568087 #304]  INFO -- : Writing /tmp/build_aa80130b/public/assets/application-d22527d031ffd7a82ead46db46caed7f1165c4f7f57f32dde36f07fefcec4187.js
+       I, [2021-06-17T16:42:16.568909 #304]  INFO -- : Writing /tmp/build_aa80130b/public/assets/application-d22527d031ffd7a82ead46db46caed7f1165c4f7f57f32dde36f07fefcec4187.js.gz
+       I, [2021-06-17T16:42:16.606338 #304]  INFO -- : Writing /tmp/build_aa80130b/public/assets/application-cad66f2db8a44a95f885f2702d1df37744743c332ebd046697b153ce3fca483f.css
+       I, [2021-06-17T16:42:16.606506 #304]  INFO -- : Writing /tmp/build_aa80130b/public/assets/application-cad66f2db8a44a95f885f2702d1df37744743c332ebd046697b153ce3fca483f.css.gz
+       Asset precompilation completed (6.60s)
        Cleaning assets
        Running: rake assets:clean
-       I, [2021-06-17T13:49:00.140012 #322]  INFO -- : Removed application-a226d6f5a204577a825ee41bf04abd6c23ce14b8b732c2bcf883c148480af0f8.js
+       I, [2021-06-17T16:42:17.823539 #325]  INFO -- : Removed application-35729bfbaf9967f119234595ed222f7ab14859f304ab0acc5451afb387f637fa.css
+       I, [2021-06-17T16:42:17.824748 #325]  INFO -- : Removed application-55d6b70906b895472f2bf756d7ddcf49ca4869bc45ddd3815f3e10eb48aeb3b9.js
 -----> Detecting rails configuration
 ###### WARNING:
        There is a more recent Ruby version available for you to use:
@@ -124,5 +127,5 @@ https://s3716853-rad.herokuapp.com
 -----> Compressing...
        Done: 50.6M
 -----> Launching...
-       Released v12
+       Released v15
        https://s3716853-rad.herokuapp.com/ deployed to Heroku
