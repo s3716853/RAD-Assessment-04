@@ -1,0 +1,52 @@
+<%= form_with url: '/form_submit' do |f| %>
+  
+  <fieldset class='form-group'>
+    <legend class=''>Number of Questions</legend>
+    <% for i in 4..8 do %>
+      <div class='form-check form-check-inline'>
+        <%= f.radio_button "number", i, class: 'form-check-input', :required => true%>
+        <%= f.label "number_#{i}", i, class: 'form-check-label' %>
+      </div>
+    <% end %>
+  </fieldset>
+    
+  <fieldset class='form-group'>
+    <legend class=''>Categories</legend>
+    <div class='form-check form-check-inline'>
+      <%= f.check_box :categories_linux, class: 'form-check-input' %>
+      <%= f.label :categories_linux, 'Linux', class: 'form-check-label' %>
+    </div>
+    <div class='form-check form-check-inline'>
+      <%= f.check_box :categories_devops, class: 'form-check-input' %>
+      <%= f.label :categories_devops, 'Dev Ops', class: 'form-check-label' %>
+    </div>
+    <div class='form-check form-check-inline'>
+      <%= f.check_box :categories_networking, class: 'form-check-input' %>
+      <%= f.label :categories_networking, 'Networking', class: 'form-check-label' %>
+    </div>
+    <div class='form-check form-check-inline'>
+      <%= f.check_box :categories_programming, class: 'form-check-input' %>
+      <%= f.label :categories_programming, 'Programming', class: 'form-check-label' %>
+    </div>
+  </fieldset>
+  
+  <fieldset class='form-group'>
+    <legend class=''>Difficulty</legend>
+    <div class='form-check form-check-inline'>
+      <%= f.radio_button :difficulty, 'Easy', class: 'form-check-input', :required => true%>
+      <%= f.label :difficulty_easy, 'Easy', class: 'form-check-label' %>
+    </div>
+    <div class='form-check form-check-inline'>
+      <%= f.radio_button :difficulty, 'Medium', class: 'form-check-input', :required => true   %>
+      <%= f.label :difficulty_medium, 'Medium', class: 'form-check-label' %>
+    </div>
+    <div class='form-check form-check-inline'>
+      <%= f.radio_button :difficulty, 'Hard', class: 'form-check-input', :required => true %>
+      <%= f.label :difficulty_hard, 'Hard', class: 'form-check-label' %>
+    </div>
+  </fieldset>
+
+  <div class='actions'>
+    <%= f.submit 'Start Quiz', class: 'btn btn-primary' %>
+  </div>
+<% end %>

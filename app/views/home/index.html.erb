@@ -1,6 +1,9 @@
-Hello World
-
-<button data-theme-select="theme-light">Light Theme</button>
-<button data-theme-select="theme-dark">Dark Theme</button>
-
-<button onClick="queryFile('/users.json')">Dark Theme</button>
+<div>
+  <% flash.each do |type, msg| %>
+      <div class="alert alert-warning" role="alert">
+        <%= msg %>
+      </div>
+  <% end %>
+  Welcome to Quiz+!
+  <%= render "home/quiz_form" %>
+</div>
