@@ -1,22 +1,14 @@
-window.addEventListener("load", () => {
-  const quizSubmitButton = document.querySelector("#quiz-restart-btn")
-  
-  quizSubmitButton.addEventListener("click", (event) => {
-    location.reload();
-  })
-});
+window.restartQuiz = () => {
+  location.reload();
+}
 
-window.addEventListener("load", () => {
-  const quizSubmitButton = document.querySelector("#quiz-reset-btn")
-  
-  quizSubmitButton.addEventListener("click", (event) => {
-    document.querySelector("#quiz-results").classList.add("hidden")
-    document.querySelectorAll(".quiz-answers").forEach((element) => {
-        element.checked = false
-    })
-    document.querySelectorAll("div[data-quiz-question-number]")[0].classList.remove("hidden")
+window.resetQuiz = () => {
+  document.querySelector("#quiz-results").classList.add("hidden")
+  document.querySelectorAll(".quiz-answers").forEach((element) => {
+      element.checked = false
   })
-});
+  document.querySelectorAll("div[data-quiz-question-number]")[0].classList.remove("hidden")
+}
 
 window.displayPreviousQuestion = (questionToDisplay) => {
   const questions = document.querySelectorAll("div[data-quiz-question-number]")

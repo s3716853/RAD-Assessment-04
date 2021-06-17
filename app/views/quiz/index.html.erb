@@ -20,8 +20,8 @@
       <span>/<%= @questions.length %></span>
     </div>
     <div>
-      <button class='btn btn-primary' id='quiz-reset-btn'>Restart Same Quiz</button>
-      <button class='btn btn-primary' id='quiz-restart-btn'>New Quiz With Same Settings</button>
+      <button class='btn btn-primary' id='quiz-reset-btn' onClick='resetQuiz()'>Restart Same Quiz</button>
+      <button class='btn btn-primary' id='quiz-restart-btn' onclick='restartQuiz()'>New Quiz With Same Settings</button>
     </div>
     <div id='quiz-results-previous'>
       <% @history.each do |history_item| %>
