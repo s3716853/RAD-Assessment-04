@@ -73,6 +73,7 @@ class QuizController < ApplicationController
           if response.code != 200 && response.code != 404
             throw StandardError.new(response.code)
           elsif response.code == 404
+            # Sends 404 when no questions can be found
             category_question_lists.append([])
           else
             category_question_lists.append(response) 
