@@ -19,11 +19,25 @@ class QuizController < ApplicationController
         #there is the possiblity when running of the local quiz.json that there 
         #arent enough distinct questions that match the quiz parameters
         #which would cause an infinite loop, thereofr the following is for that possiblity
-        if(questions.length == allowed_questions.length){
+        if @questions.length == allowed_questions.length
           continue_search = false
-        }
+        
+        end
       end
     end
+    
+    #getting correct answers for the javascript
+    @questions_correct_answers = []
+    @questions.each do |question|
+      question_correct_answers = []
+      question['correct_answers'].each do |key, answer_is_correct|
+        if answer_is_correct.downcase == 'true'
+          question_correct_answers.append(key)
+        end
+      end
+      @questions_correct_answers.push(question_correct_answers)
+    end
+    @questions_correct_answers = @questions_correct_answers.to_json
     
   end
   

@@ -1,6 +1,6 @@
 <div data-questions-amount=<%= @questions.length %>>
   <% @questions.each_with_index do |question, index| %>
-    <%= render partial: "quiz/question", 
+    <%= render partial: 'quiz/question', 
         locals: {
           question: question['question'], 
           answers: question['answers'], 
@@ -10,6 +10,14 @@
           questions_amount: @questions.length
           } %>
   <% end %>
-  <div id="quiz-results" data-quiz-correct-answers="">
+  <div id='quiz-results' class='hidden' data-quiz-correct-answers=<%= @questions_correct_answers %>>
+    <div>
+      <span id='quiz-results-score'></span>
+      <span>/<%= @questions.length %></span>
+    </div>
+    <div>
+      <button class='btn btn-primary' id='quiz-reset-btn'>Restart Same Quiz</button>
+      <button class='btn btn-primary' id='quiz-restart-btn'>New Quiz With Same Settings</button>
+    </div>
   </div>
 </div>
