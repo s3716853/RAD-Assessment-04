@@ -24,7 +24,7 @@ class HomeController < ApplicationController
     else
       get_request_string += "difficulty=#{user_params[:difficulty]}&number=#{user_params[:number]}"
     
-      redirect_to "/?#{get_request_string}"
+      redirect_to "/quiz?#{get_request_string}"
     end
   end
   
