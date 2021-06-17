@@ -1,24 +1,12 @@
-# README
+#RAD Assignment 4
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Student number
+s3716853
 
-Things you may want to cover:
+##API Key
+59keJx4a326CrYjoGvrbaMTB8Jrps943N4b33nwU
 
-* Ruby version
+##Heroku URL
+https://s3716853-rad.herokuapp.com
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+##Heroku Log
