@@ -1,4 +1,7 @@
 <div data-questions-amount=<%= @questions.length %>>
+  <% if @questions.length == 0 %>
+    Sorry, there arent any questions for your requested settings! Go back and try some different ones
+  <% end %>
   <% @questions.each_with_index do |question, index| %>
     <%= render partial: 'quiz/question', 
         locals: {
