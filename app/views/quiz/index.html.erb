@@ -1,8 +1,15 @@
-Hello World
-
-<div>
-  <% @questions.each do |question| %>
-    <div>
-      <%= question['question'] %>
-    </div>
+<div data-questions-amount=<%= @questions.length %>>
+  <% @questions.each_with_index do |question, index| %>
+    <%= render partial: "quiz/question", 
+        locals: {
+          question: question['question'], 
+          answers: question['answers'], 
+          category: question['category'], 
+          difficulty: question['difficulty'],
+          question_number: index + 1,
+          questions_amount: @questions.length
+          } %>
+  <% end %>
+  <div id="quiz-results" data-quiz-correct-answers="">
+  </div>
 </div>

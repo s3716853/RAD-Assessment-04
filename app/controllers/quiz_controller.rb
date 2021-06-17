@@ -5,7 +5,7 @@ class QuizController < ApplicationController
     
     questions_index = []
     @questions = []
-    for i in 0..quiz_params[:number].to_i do
+    for i in 1..quiz_params[:number].to_i do
       continue_search = true
       early_end = 1000
       while continue_search do
@@ -15,10 +15,13 @@ class QuizController < ApplicationController
           @questions.append(allowed_questions[random_integer])
           continue_search = false
         end
-        early_end -= 1
-        if early_end == 0
-          break
-        end
+        
+        #there is the possiblity when running of the local quiz.json that there 
+        #arent enough distinct questions that match the quiz parameters
+        #which would cause an infinite loop, thereofr the following is for that possiblity
+        if(questions.length == allowed_questions.length){
+          continue_search = false
+        }
       end
     end
     
@@ -39,7 +42,7 @@ class QuizController < ApplicationController
     def filter_questions(quiz_questions, quiz_params)
       allowed_questions = []
       quiz_questions.each do |question|
-        if question['difficulty'] == quiz_params[:difficulty] && quiz_params[:categories].includes?(question['category'])
+        if question['difficulty'] == quiz_params[:difficulty] && quiz_params[:categories].include?(question['category'])
           allowed_questions.append(question)
         end
       end
