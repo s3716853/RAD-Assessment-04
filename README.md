@@ -87,7 +87,7 @@ https://s3716853-rad.herokuapp.com
        Bundle complete! 20 Gemfile dependencies, 65 gems now installed.
        Gems in the groups 'development' and 'test' were not installed.
        Bundled gems are installed into `./vendor/bundle`
-       Bundle completed (0.48s)
+       Bundle completed (0.49s)
        Cleaning up the bundler cache.
 -----> Installing node-v12.16.2-linux-x64
 -----> Detecting rake tasks
@@ -95,15 +95,9 @@ https://s3716853-rad.herokuapp.com
        Running: rake assets:precompile
        Yarn executable was not detected in the system.
        Download Yarn at https://yarnpkg.com/en/docs/install
-       I, [2021-06-17T16:42:16.568087 #304]  INFO -- : Writing /tmp/build_aa80130b/public/assets/application-d22527d031ffd7a82ead46db46caed7f1165c4f7f57f32dde36f07fefcec4187.js
-       I, [2021-06-17T16:42:16.568909 #304]  INFO -- : Writing /tmp/build_aa80130b/public/assets/application-d22527d031ffd7a82ead46db46caed7f1165c4f7f57f32dde36f07fefcec4187.js.gz
-       I, [2021-06-17T16:42:16.606338 #304]  INFO -- : Writing /tmp/build_aa80130b/public/assets/application-cad66f2db8a44a95f885f2702d1df37744743c332ebd046697b153ce3fca483f.css
-       I, [2021-06-17T16:42:16.606506 #304]  INFO -- : Writing /tmp/build_aa80130b/public/assets/application-cad66f2db8a44a95f885f2702d1df37744743c332ebd046697b153ce3fca483f.css.gz
-       Asset precompilation completed (6.60s)
+       Asset precompilation completed (1.55s)
        Cleaning assets
        Running: rake assets:clean
-       I, [2021-06-17T16:42:17.823539 #325]  INFO -- : Removed application-35729bfbaf9967f119234595ed222f7ab14859f304ab0acc5451afb387f637fa.css
-       I, [2021-06-17T16:42:17.824748 #325]  INFO -- : Removed application-55d6b70906b895472f2bf756d7ddcf49ca4869bc45ddd3815f3e10eb48aeb3b9.js
 -----> Detecting rails configuration
 ###### WARNING:
        There is a more recent Ruby version available for you to use:
@@ -127,5 +121,5 @@ https://s3716853-rad.herokuapp.com
 -----> Compressing...
        Done: 50.6M
 -----> Launching...
-       Released v15
+       Released v16
        https://s3716853-rad.herokuapp.com/ deployed to Heroku
