@@ -2,12 +2,13 @@
   <% @questions.each_with_index do |question, index| %>
     <%= render partial: 'quiz/question', 
         locals: {
-          question: question['question'], 
-          answers: question['answers'], 
-          category: question['category'], 
-          difficulty: question['difficulty'],
-          question_number: index + 1,
-          questions_amount: @questions.length
+            question: question['question'], 
+            answers: question['answers'], 
+            category: question['category'], 
+            difficulty: question['difficulty'],
+            question_number: index + 1,
+            questions_amount: @questions.length,
+            multiple_answers: is_multi_answer_question(question)
           } %>
   <% end %>
   <div id='quiz-results' class='hidden' data-quiz-correct-answers=<%= @questions_correct_answers %>>

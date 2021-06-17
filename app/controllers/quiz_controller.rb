@@ -1,4 +1,6 @@
 class QuizController < ApplicationController
+  helper_method :is_multi_answer_question
+  
   def index
 
     @questions = retrieve_quiz_questions quiz_params
@@ -18,6 +20,22 @@ class QuizController < ApplicationController
     end
     @questions_correct_answers = @questions_correct_answers.to_json
     
+  end
+  
+  def is_multi_answer_question(question)
+    
+    # This is staying here while I figure out whether or not
+    # all questions should let you go with multi choice
+    # in 80+ or just hard ones
+    # answer_count = 0
+    # question['correct_answers'].each do |key, is_correct_answer|
+    #   if is_correct_answer.downcase == 'true'
+    #     answer_count += 1
+    #   end
+    # end
+    
+    # answer_count > 1
+    true
   end
   
   private 
@@ -43,17 +61,18 @@ class QuizController < ApplicationController
       
       questions_list = [];
       begin
-        throw StandardError.new()
         base_url = "https://quizapi.io/api/v1/questions?apiKey=59keJx4a326CrYjoGvrbaMTB8Jrps943N4b33nwU&difficulty=#{quiz_params[:difficulty]}"
-        quiz_params[:categories].each_with_index do |category, index|
+        quiz_params[:categories].each_with_index do |category, index| 
           request_url = "#{base_url}&limit=#{category_limits[index]}&category=#{category}"
+          puts request_url
           response = HTTParty.get(request_url)
           if response.code != 200
             throw StandardError.new(response.code)
           end
           questions_list = questions_list + response
         end
-      rescue HTTParty::Error, StandardError
+      rescue HTTParty::Error, StandardError => e
+        puts e
         puts "Error with quizapi request, using local instance"
         questions_list = filterLocal quiz_params
       end

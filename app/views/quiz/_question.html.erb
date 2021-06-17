@@ -10,8 +10,13 @@
       <% answers.each_with_index do |(key, answer), index| %>
         <% if !answer.nil? %>
           <div class='form-check form-check-inline'>
-            <%= radio_button "question_#{question_number}", "answer", key, class: 'form-check-input quiz-answers'%>
-            <%= label "question_#{question_number}", "answer", answer, class: 'form-check-label', :value => key %>
+            <% if multiple_answers %>
+              <%= check_box "question_#{question_number}", key, {class: 'form-check-input quiz-answers'}, key %>
+              <%= label "question_#{question_number}", key, answer, class: 'form-check-label' %>
+            <% else %>
+              <%= radio_button "question_#{question_number}", "answer", key, class: 'form-check-input quiz-answers'%>
+              <%= label "question_#{question_number}", "answer", answer, class: 'form-check-label', :value => key %>
+            <% end %>
           </div>
         <% end %>
       <% end %>
@@ -19,13 +24,13 @@
   </div>
   <div>
     <% if question_number != 1 %>
-      <button class='btn btn-secondary' data-quiz-prev-target=<%= question_number - 1 %>>Previous</button>
+      <button class='btn btn-secondary' onClick='displayPreviousQuestion(<%= question_number - 1 %>)' data-quiz-prev-target=<%= question_number - 1 %>>Previous</button>
     <% end %>
     <% if question_number != questions_amount %>
-      <button class='btn btn-secondary' data-quiz-next-target=<%= question_number + 1 %>>Next</button>
+      <button class='btn btn-secondary' onClick='displayNextQuestion(<%= question_number + 1 %>)' data-quiz-next-target=<%= question_number + 1 %>>Next</button>
     <% end %>
     <% if question_number == questions_amount %>
-      <button class='btn btn-primary' id='quiz-submit-btn'>Submit</button>
+      <button class='btn btn-primary' id='quiz-submit-btn' onClick='submitQuiz()'>Submit</button>
     <% end %>
   </div>
 </div>

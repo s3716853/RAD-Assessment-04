@@ -1,26 +1,4 @@
 window.addEventListener("load", () => {
-  const nextQuestionButtons = document.querySelectorAll("button[data-quiz-next-target]")
-  
-  nextQuestionButtons.forEach((element) => {
-    
-    element.addEventListener("click", (event) => {
-      
-      displayNextQuestion(element.dataset.quizNextTarget)
-      
-    });
-    
-  });
-});
-
-window.addEventListener("load", () => {
-  const quizSubmitButton = document.querySelector("#quiz-submit-btn")
-  
-  quizSubmitButton.addEventListener("click", (event) => {
-    submitQuiz()
-  })
-});
-
-window.addEventListener("load", () => {
   const quizSubmitButton = document.querySelector("#quiz-restart-btn")
   
   quizSubmitButton.addEventListener("click", (event) => {
@@ -39,6 +17,18 @@ window.addEventListener("load", () => {
     document.querySelectorAll("div[data-quiz-question-number]")[0].classList.remove("hidden")
   })
 });
+
+window.displayPreviousQuestion = (questionToDisplay) => {
+  const questions = document.querySelectorAll("div[data-quiz-question-number]")
+  
+  questions.forEach((element) => {
+    if(element.dataset.quizQuestionNumber == questionToDisplay){
+      element.classList.remove("hidden")
+    }else{
+      element.classList.add("hidden")
+    }
+  })
+}
 
 window.displayNextQuestion = (questionToDisplay) => {
   const questions = document.querySelectorAll("div[data-quiz-question-number]")
