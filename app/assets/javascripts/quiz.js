@@ -2,6 +2,11 @@ window.restartQuiz = () => {
   location.reload();
 }
 
+window.changeSettings = () => {
+  let getParameters = window.location.href.split("?")[1]
+  window.location.replace(`/?${getParameters}`);
+}
+
 window.resetQuiz = () => {
   document.querySelector("#quiz-results").classList.add("hidden")
   document.querySelectorAll(".quiz-answers").forEach((element) => {

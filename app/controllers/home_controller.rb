@@ -1,5 +1,11 @@
 class HomeController < ApplicationController
   def index
+    prefill_params = form_prefill_params
+    
+    @difficulty = prefill_params[:difficulty]
+    @categories = prefill_params[:categories]
+    @number = prefill_params[:number].to_i
+    
   end
   
   def form_submit
@@ -34,5 +40,8 @@ class HomeController < ApplicationController
     def quiz_params
       params.permit(:difficulty, :categories_linux, :categories_devops, :categories_networking, :categories_programming, :number)
     end
-  
+    
+    def form_prefill_params
+      params.permit(:difficulty, :number, :categories => [])
+    end
 end
