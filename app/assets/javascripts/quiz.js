@@ -1,5 +1,5 @@
 window.restartQuiz = () => {
-  location.reload();
+  window.location.reload();
 }
 
 window.changeSettings = () => {
@@ -36,6 +36,7 @@ window.displayNextQuestion = (questionToDisplay) => {
   
   let isAnswered = false
   
+  // ensuring question is answered before continuing
   possibleAnswers.forEach(answer => {
     if(answer.checked){
       isAnswered = true
@@ -61,7 +62,9 @@ window.submitQuiz = () => {
   
   let quizAnswers = []
   
+  // Going through all checkboxs to find which ones the user selected in the quiz 
   for(let i = 0; i < questionAmount; i++){
+    // all answer checkboxes have the .quiz-answers class
     let possibleAnswers = questions[i].querySelectorAll(".quiz-answers")
     let questionAnswers = []
     possibleAnswers.forEach((element) => {
@@ -73,6 +76,7 @@ window.submitQuiz = () => {
     quizAnswers.push(questionAnswers)
   }
   
+  // tallying correct answers
   const quizCorrectAnswers = JSON.parse(document.querySelector("div[data-quiz-correct-answers]").dataset.quizCorrectAnswers)
   let correctAnswerCount = 0
   
@@ -84,6 +88,7 @@ window.submitQuiz = () => {
     }
   }
   
+  // Showing results
   document.querySelector("#quiz-results-score").innerHTML = correctAnswerCount
   document.querySelector("#quiz-results").classList.remove("hidden")
   questions[questions.length-1].classList.add("hidden")
@@ -108,6 +113,7 @@ window.setHistoryCookie = (correctAnswerCount, questionAmount) => {
   document.cookie = `quizplus_quizhistory=${JSON.stringify(historyCookieParsed)}`
 }
 
+// for comparing user answers to correct answers
 window.compareArrays = (array1, array2) => {
   if(array1.length !== array2.length){
     return false;
