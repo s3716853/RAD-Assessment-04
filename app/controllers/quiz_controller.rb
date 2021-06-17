@@ -1,31 +1,9 @@
 class QuizController < ApplicationController
   def index
 
-    allowed_questions = filter_questions retrieve_quiz_questions, quiz_params
+    @questions = retrieve_quiz_questions quiz_params
     
-    questions_index = []
-    @questions = []
-    for i in 1..quiz_params[:number].to_i do
-      continue_search = true
-      early_end = 1000
-      while continue_search do
-        random_integer = rand(allowed_questions.length - 1)
-        if !questions_index.include?(random_integer)
-          questions_index.append(random_integer)
-          @questions.append(allowed_questions[random_integer])
-          continue_search = false
-        end
-        
-        #there is the possiblity when running of the local quiz.json that there 
-        #arent enough distinct questions that match the quiz parameters
-        #which would cause an infinite loop, thereofr the following is for that possiblity
-        if @questions.length == allowed_questions.length
-          continue_search = false
-        end
-      end
-      
-      @history = cookies[:quizplus_quizhistory] ? JSON.parse(cookies[:quizplus_quizhistory])  : []
-    end
+    @history = cookies[:quizplus_quizhistory] ? JSON.parse(cookies[:quizplus_quizhistory]) : []
     
     #getting correct answers for the javascript
     @questions_correct_answers = []
@@ -49,19 +27,61 @@ class QuizController < ApplicationController
       params.permit(:difficulty, :number, :categories => [])
     end
     
-    def retrieve_quiz_questions
-      quiz_file = File.read('quiz.json')
-      JSON.parse(quiz_file)
-    end
-    
-    def filter_questions(quiz_questions, quiz_params)
-      allowed_questions = []
-      quiz_questions.each do |question|
-        if question['difficulty'] == quiz_params[:difficulty] && quiz_params[:categories].include?(question['category'])
-          allowed_questions.append(question)
+    def retrieve_quiz_questions(quiz_params)
+      
+      random_integer_limit = quiz_params[:number].to_i
+      category_limits = []
+      quiz_params[:categories].each_with_index do |category, index|
+        if index + 1 == quiz_params[:categories].length
+          category_limits.push(random_integer_limit)
+        else
+          limit = random_integer_limit != 0 ? rand(random_integer_limit) : 0
+          category_limits.push(limit)
+          random_integer_limit -= limit
         end
       end
       
-      allowed_questions
+      puts "LIMITS ARE AS FOLLOWS"
+      puts category_limits
+      
+      questions_list = [];
+      begin
+        throw StandardError.new('')
+        byebug
+        base_url = "https://quizapi.io/api/v1/questions?apiKey=59keJx4a326CrYjoGvrbaMTB8Jrps943N4b33nwU&difficulty=#{quiz_params[:difficulty]}"
+        quiz_params[:categories].each_with_index do |category, index|
+          request_url = "#{base_url}&limit=#{category_limits[index]}&category=#{category}"
+          response = HTTParty.get(request_url)
+          if response.code != 200
+            throw StandardError.new(response.code)
+          end
+          questions_list = questions_list + response
+        end
+      rescue HTTParty::Error, StandardError
+        puts "Error with quizapi request, using local instance"
+        questions_list = filterLocal quiz_params
+      end
+      
+      questions_list
+    end
+    
+    def filterLocal(quiz_params)
+  
+      where_string = "("
+      where_array = []
+      
+      quiz_params[:categories].each_with_index do |category, index|
+        where_array.append(category)
+        if index != 0 
+          where_string += " OR "
+        end
+        where_string += "category = ?"
+      end
+      
+      where_array.append(quiz_params[:difficulty])
+      # where_array.append(quiz_params[:number])
+      where_string += ") AND difficulty = ?"
+      quiz_questions = Question.where(where_string, *where_array).order('RANDOM()')
+      quiz_questions
     end
 end
