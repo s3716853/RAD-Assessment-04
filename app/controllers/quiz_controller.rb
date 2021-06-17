@@ -41,13 +41,9 @@ class QuizController < ApplicationController
         end
       end
       
-      puts "LIMITS ARE AS FOLLOWS"
-      puts category_limits
-      
       questions_list = [];
       begin
-        throw StandardError.new('')
-        byebug
+        throw StandardError.new()
         base_url = "https://quizapi.io/api/v1/questions?apiKey=59keJx4a326CrYjoGvrbaMTB8Jrps943N4b33nwU&difficulty=#{quiz_params[:difficulty]}"
         quiz_params[:categories].each_with_index do |category, index|
           request_url = "#{base_url}&limit=#{category_limits[index]}&category=#{category}"
@@ -82,6 +78,15 @@ class QuizController < ApplicationController
       # where_array.append(quiz_params[:number])
       where_string += ") AND difficulty = ?"
       quiz_questions = Question.where(where_string, *where_array).order('RANDOM()')
-      quiz_questions
+      
+      return_questions = []
+      for i in 0..quiz_params[:number].to_i - 1
+        if i >= quiz_questions.length
+          break
+        end
+        return_questions[i] = quiz_questions[i]
+      end
+      
+      return_questions
     end
 end
