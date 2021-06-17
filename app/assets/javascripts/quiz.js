@@ -43,13 +43,29 @@ window.addEventListener("load", () => {
 window.displayNextQuestion = (questionToDisplay) => {
   const questions = document.querySelectorAll("div[data-quiz-question-number]")
   
-  questions.forEach((element) => {
-    if(element.dataset.quizQuestionNumber == questionToDisplay){
-      element.classList.remove("hidden")
-    }else{
-      element.classList.add("hidden")
+  //minus 2, as the questionToDisplay variable starts at 1, and i want the previous
+  //question
+  const possibleAnswers = questions[questionToDisplay-2].querySelectorAll(".quiz-answers")
+  
+  let isAnswered = false
+  
+  possibleAnswers.forEach(answer => {
+    if(answer.checked){
+      isAnswered = true
     }
   })
+  
+  if(isAnswered){
+    questions.forEach((element) => {
+      if(element.dataset.quizQuestionNumber == questionToDisplay){
+        element.classList.remove("hidden")
+      }else{
+        element.classList.add("hidden")
+      }
+    })
+  }else{
+    alert("Select an answer before continuing")
+  }
 }
 
 window.submitQuiz = () => {
