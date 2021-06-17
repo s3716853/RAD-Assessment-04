@@ -1,4 +1,7 @@
-<div data-questions-amount=<%= @questions.length %>>
+<div data-questions-amount=<%= @questions.length %> 
+     data-questions-difficulty=<%= @difficulty %>
+     data-questions-categories='<%= @categories %>'
+     data-questions-question-ids='<%= @question_ids %>'>
   <% if @questions.length == 0 %>
     Sorry, there arent any questions for your requested settings! Go back and try some different ones
   <% end %>

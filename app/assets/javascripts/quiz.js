@@ -94,6 +94,8 @@ window.submitQuiz = () => {
   questions[questions.length-1].classList.add("hidden")
   
   setHistoryCookie(correctAnswerCount, questionAmount)
+  
+  saveResultToDatabase(correctAnswerCount, questionAmount)
 }
 
 window.setHistoryCookie = (correctAnswerCount, questionAmount) => {
@@ -111,6 +113,24 @@ window.setHistoryCookie = (correctAnswerCount, questionAmount) => {
   }
   
   document.cookie = `quizplus_quizhistory=${JSON.stringify(historyCookieParsed)}`
+}
+
+window.saveResultToDatabase = (correctAnswerCount, questionAmount) => {
+  let result = `${correctAnswerCount}/${questionAmount}`
+  let categories = document.querySelector("div[data-questions-categories]").dataset.questionsCategories;
+  let difficulty = document.querySelector("div[data-questions-difficulty]").dataset.questionsDifficulty;
+  let questionIds = document.querySelector("div[data-questions-question-ids]").dataset.questionsQuestionIds;
+  
+  $.ajax({
+      url: "/histories",
+      method: "POST",
+      data: {
+          "topic": categories,
+          "difficulty": difficulty,
+          "questions": questionIds,
+          "results": result
+      }
+    });
 }
 
 // for comparing user answers to correct answers

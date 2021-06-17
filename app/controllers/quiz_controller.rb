@@ -9,7 +9,9 @@ class QuizController < ApplicationController
     
     #getting correct answers for the javascript
     @questions_correct_answers = []
+    questions_ids_array = []
     @questions.each do |question|
+      questions_ids_array.append(question['id'])
       question_correct_answers = []
       question['correct_answers'].each do |key, answer_is_correct|
         if answer_is_correct.downcase == 'true'
@@ -20,6 +22,10 @@ class QuizController < ApplicationController
     end
     @questions_correct_answers = @questions_correct_answers.to_json
     
+    # These are defined for the javascript to use when creating history
+    @difficulty = quiz_params[:difficulty]
+    @categories = quiz_params[:categories].join(', ') 
+    @question_ids = questions_ids_array.join(', ')
   end
   
   def is_multi_answer_question(question)

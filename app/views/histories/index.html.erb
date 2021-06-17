@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>History</h1>
+
+<% @histories.each do |history| %>
+  <div class='history-item'>
+      <div>
+        Date/Time:
+        <%= history.created_at %>
+      </div>
+      <div>
+        Topic:
+        <%= history.topic %>
+      </div>
+      <div>
+        Difficulty:
+        <%= history.difficulty %>
+      </div>
+      <div>
+        Questions:
+        <%= history.questions %>
+      </div>
+      <div>
+        Results:
+        <%= history.results %> 
+      </div>
+  </div>
+<% end %>

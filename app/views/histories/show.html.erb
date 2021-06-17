@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Topic:</strong>
+  <%= @history.topic %>
+</p>
+
+<p>
+  <strong>Difficulty:</strong>
+  <%= @history.difficulty %>
+</p>
+
+<p>
+  <strong>Questions:</strong>
+  <%= @history.questions %>
+</p>
+
+<p>
+  <strong>Results:</strong>
+  <%= @history.results %>
+</p>
+
+<%= link_to 'Edit', edit_history_path(@history) %> |
+<%= link_to 'Back', histories_path %>
